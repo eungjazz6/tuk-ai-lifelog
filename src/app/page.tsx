@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import { useRouter } from 'next/navigation'
 import { Log, Category, CATEGORY_META } from '@/lib/types'
 import InputBar from '@/components/InputBar'
 import LogCard from '@/components/LogCard'
@@ -32,7 +31,7 @@ export default function Home() {
   const [dashboard, setDashboard] = useState<'spending' | null>(null)
   const [calendarSelectedDate, setCalendarSelectedDate] = useState<string | null>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
+
 
   useEffect(() => {
     if (!drawerOpen) return
@@ -54,10 +53,6 @@ export default function Home() {
     setApiKeySaving(false)
   }
 
-  const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' })
-    router.push('/login')
-  }
 
   useEffect(() => {
     const saved = localStorage.getItem('tuk-theme') as Theme | null
@@ -299,20 +294,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 로그아웃 */}
-        <div style={{ marginTop: 'auto' }}>
-          <button
-            onClick={handleLogout}
-            style={{
-              width: '100%', padding: '10px 0', borderRadius: 12,
-              background: 'transparent',
-              color: 'var(--label3)',
-              border: '0.5px solid var(--border)',
-              fontSize: 13, fontWeight: 500, cursor: 'pointer',
-            }}>
-            로그아웃
-          </button>
-        </div>
       </div>
 
       {dashboard === 'spending' && (
