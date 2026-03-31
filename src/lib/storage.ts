@@ -30,13 +30,16 @@ export function getGeminiApiKey(): string {
 }
 
 function ensureFile(): void {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true })
-  if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '[]', 'utf-8')
+  try {
+    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true })
+    if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, '[]', 'utf-8')
+  } catch {}
 }
 
 export function readLogs(): Log[] {
-  ensureFile()
   try {
+    ensureFile()
+    if (!fs.existsSync(DATA_FILE)) return []
     return JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8')) as Log[]
   } catch {
     return []
@@ -44,8 +47,10 @@ export function readLogs(): Log[] {
 }
 
 export function writeLogs(logs: Log[]): void {
-  ensureFile()
-  fs.writeFileSync(DATA_FILE, JSON.stringify(logs, null, 2), 'utf-8')
+  try {
+    ensureFile()
+    fs.writeFileSync(DATA_FILE, JSON.stringify(logs, null, 2), 'utf-8')
+  } catch {}
 }
 
 export function addLog(log: Log): void {

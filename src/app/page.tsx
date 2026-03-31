@@ -67,7 +67,9 @@ export default function Home() {
   const fetchLogs = useCallback(async () => {
     try {
       const res = await fetch('/api/logs')
-      setLogs(await res.json() as Log[])
+      if (!res.ok) return
+      const data = await res.json()
+      if (Array.isArray(data)) setLogs(data as Log[])
     } catch {}
   }, [])
 
