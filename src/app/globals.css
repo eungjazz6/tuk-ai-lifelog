@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary:        #7B78EE;
+  --primary-dim:    rgba(123,120,238,0.15);
+  --primary-border: rgba(123,120,238,0.28);
+
+  --bg:             #000000;
+  --bg2:            rgba(255,255,255,0.09);
+  --bg3:            rgba(255,255,255,0.14);
+
+  --label:          rgba(255,255,255,0.92);
+  --label2:         rgba(255,255,255,0.70);
+  --label3:         rgba(255,255,255,0.55);
+  --label4:         rgba(255,255,255,0.32);
+  --sep:            rgba(255,255,255,0.08);
+  --border:         rgba(255,255,255,0.12);
+
+  --surface-bg:     linear-gradient(145deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.07) 100%);
+  --surface-border: rgba(255,255,255,0.14);
+  --surface-shadow: none;
+  --bar-bg:         rgba(0,0,0,0.55);
+
+  --c-일정: rgba(255,255,255,0.70);
+  --c-소비: #9B86D4;
+  --c-운동: #C47FD8;
+  --c-식단: #E07FAF;
+  --c-몸:   #E87FA0;
+  --c-메모: rgba(255,255,255,0.35);
+}
+
+[data-theme="light"] {
+  --bg:             #ffffff;
+  --bg2:            rgba(0,0,0,0.05);
+  --bg3:            rgba(0,0,0,0.08);
+
+  --label:          rgba(0,0,0,0.88);
+  --label2:         rgba(0,0,0,0.60);
+  --label3:         rgba(0,0,0,0.40);
+  --label4:         rgba(0,0,0,0.22);
+  --sep:            rgba(0,0,0,0.07);
+  --border:         rgba(0,0,0,0.09);
+
+  --surface-bg:     rgba(255,255,255,0.78);
+  --surface-border: rgba(0,0,0,0.07);
+  --surface-shadow: 0 2px 8px rgba(0,0,0,0.09), 0 0.5px 2px rgba(0,0,0,0.05);
+  --bar-bg:         rgba(255,255,255,0.55);
+
+  --c-일정: rgba(0,0,0,0.45);
+  --c-소비: #7B64B8;
+  --c-운동: #A460C0;
+  --c-식단: #C45D90;
+  --c-몸:   #C85E7A;
+  --c-메모: rgba(0,0,0,0.30);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  background: var(--bg);
+  color: var(--label);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'Helvetica Neue', system-ui, sans-serif;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.card {
+  background: rgba(255,255,255,0.13);
+  border-radius: 18px;
+}
+.card-dim {
+  background: rgba(255,255,255,0.07);
+  border-radius: 18px;
+}
+
+[data-theme="light"] .card {
+  background: rgba(0,0,0,0.04);
+  box-shadow: none;
+}
+[data-theme="light"] .card-dim {
+  background: rgba(0,0,0,0.025);
+  box-shadow: none;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+::placeholder { color: var(--label3); opacity: 1; }
+
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-4px); }
+}
+
+.animate-slide-up { animation: slideUp 0.24s cubic-bezier(0.22,1,0.36,1) forwards; }
+.animate-fade-out { animation: fadeOut 0.2s ease-in forwards; }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset !important;
+  -webkit-text-fill-color: #fff !important;
+  caret-color: #fff;
+}
