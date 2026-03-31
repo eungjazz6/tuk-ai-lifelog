@@ -26,7 +26,7 @@ export function writeConfig(config: AppConfig): void {
 
 export function getGeminiApiKey(): string {
   const config = readConfig()
-  return config.geminiApiKey ?? ''
+  return config.geminiApiKey ?? process.env.GEMINI_API_KEY ?? ''
 }
 
 function ensureFile(): void {
@@ -38,7 +38,6 @@ function ensureFile(): void {
 
 export function readLogs(): Log[] {
   try {
-    ensureFile()
     if (!fs.existsSync(DATA_FILE)) return []
     return JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8')) as Log[]
   } catch {
